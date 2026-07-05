@@ -1,1 +1,67 @@
-1. Estructura de las carpetas (estructura)
+================== 1. Estructura de las carpetas (estructura) ==================
+
+Diagrama de la estructura
+================== ANTES ==================
+BODYTYPE-TRAINER
+|
+|_ db
+|  |_bodytype.db
+|
+|_ static
+|  |_ imagenes estaticas (son varias)
+|
+|_ proyecto.py
+|_ README.md
+|_ LICENSE
+|_ .gitignore
+
+================== DESPUES ==================
+BODYTYPE-TRAINER
+|
+|_ db
+|  |_bodytype.db
+|
+|_ static
+|  |_ imagenes estaticas (son varias)
+|
+|_ service
+| |_ los otros archivos .py para que funcione el proyecto
+| |_ varios archivos
+|
+|_ main.py
+|_ README.md
+|_ LICENSE
+|_ .gitignore
+
+================== 2. Dividir prioridades ==================
+   Que el archivo proyecto.py funcione de forma adecuada sin ser la archivo principal
+   Si se borra, se pierde todo
+
+================== 3. Aprender comandos git ==================
+git add (añadir elementos)
+git add * (añado todos los elementos)
+git add static/ (añado los elementos que esten adentro de la carpeta static)
+
+=== Guardar proyecto en una version/paquete ===
+git commit -m "Nombre del commit"
+
+=== Se sube a la brecha ===
+git push
+
+RECOMENDACION: Utilizar git status
+
+=======
+Hay otros comandos para crear brechas, eliminar brechas, eliminar commits, hacer pull a commits...
+======
+
+================== README ==================
+ABRIR ARCHIVO README (PREVISUALIZACION) ctrl + shift + v
+Titulo | fecha | version
+Descripcion
+
+Programas/lenguajes/librerias usados
+Versiones de los mismos
+Dependencias
+
+Imagenes de soporte (extra)
+Estructura de las carpetas (extra)
