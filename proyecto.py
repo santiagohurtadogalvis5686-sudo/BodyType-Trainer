@@ -1,3 +1,6 @@
+
+#Verificando conexion
+
 from tkinter import*
 
 #Importamos Pillow para manejar el tamaño de la imagen correctamente
