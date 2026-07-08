@@ -9,8 +9,10 @@ from tkinter import messagebox
 import os
 import sqlite3
 
-BASE_DIR = os.path.dirname(__file__)
-RUTA_BD = os.path.join(BASE_DIR, "..", "bd", "bodytype.db")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DIR_BD = os.path.abspath(os.path.join(BASE_DIR, "..", "db"))
+os.makedirs(DIR_BD, exist_ok=True)
+RUTA_BD = os.path.join(DIR_BD, "bodytype.db")
 
 conexion = sqlite3.connect(RUTA_BD)
 cursor = conexion.cursor()
@@ -54,7 +56,14 @@ def historial(usuario_actual):
 
     ventana_historial=tk.Toplevel()
     ventana_historial.title("Historial")
-    ventana_historial.iconbitmap("icono.ico")
+    try:
+        import os
+        ruta_ico = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "icono.ico"))
+        if not os.path.exists(ruta_ico):
+            ruta_ico = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "static", "icono.ico"))
+        ventana_historial.iconbitmap(ruta_ico)
+    except Exception:
+        pass
     ventana_historial.geometry("700x650")
     ventana_historial.config(padx=0, pady=0)
     ventana_historial.grab_set()
@@ -62,7 +71,10 @@ def historial(usuario_actual):
     ventana_historial.grid_columnconfigure(1, weight=1)
 
 
-    imagen = Image.open("fondo_historial.png")
+    ruta_img = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "fondo_historial.png"))
+    if not os.path.exists(ruta_img):
+        ruta_img = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "static", "fondo_historial.png"))
+    imagen = Image.open(ruta_img)
     imagen = imagen.resize((700, 650), Image.Resampling.LANCZOS)
 
     foto_fondo_validar = ImageTk.PhotoImage(imagen)

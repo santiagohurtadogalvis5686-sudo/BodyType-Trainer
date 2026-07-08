@@ -1,6 +1,7 @@
 from tkinter import*
 from PIL import Image, ImageTk
 from tkinter import messagebox
+import os
 import sqlite3
 import tkinter as tk
 from service.resultados import progreso, resultados
@@ -9,11 +10,16 @@ from service.rutina import ectomorfo,mesomorfo,endomorfo,alimentacion_ectomorfo,
 
 from service.resultados import RUTA_BD
 
-# Cambia tu conexión antigua por esta:
+def ruta_raiz(archivo):
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    ruta = os.path.abspath(os.path.join(base_dir, "..", archivo))
+    if not os.path.exists(ruta):
+        ruta_static = os.path.abspath(os.path.join(base_dir, "..", "static", archivo))
+        if os.path.exists(ruta_static):
+            return ruta_static
+    return ruta
+
 conexion = sqlite3.connect(RUTA_BD)
-
-
-conexion = sqlite3.connect("bodytype.db")
 cursor = conexion.cursor()
 
 cursor.execute("""
@@ -82,11 +88,18 @@ def validar(usuario, contrasena):
 
         ventana_inicio= tk.Toplevel()
         ventana_inicio.title("BodyType Trainer")
-        ventana_inicio.iconbitmap("icono.ico")
+        
+        try:
+            ruta_icono = ruta_raiz("icono.ico")
+            if os.path.exists(ruta_icono):
+                ventana_inicio.iconbitmap(ruta_icono)
+        except Exception:
+            pass
+
         ventana_inicio.config(width=500, height=500)
         ventana_inicio.grab_set()
 
-        imagen = Image.open("fondo_seleccion_cuerpo.jpeg")
+        imagen = Image.open(ruta_raiz("fondo_seleccion_cuerpo.jpeg"))
         imagen = imagen.resize((500, 500), Image.Resampling.LANCZOS)
 
         foto_fondo_validar = ImageTk.PhotoImage(imagen)
@@ -120,7 +133,7 @@ def validar(usuario, contrasena):
         titulo_emoji.place(x=315, y=10)
 
         fondo2 = Canvas(frame_validar, width=400, height=260, bd=0, highlightthickness=0, bg="black")
-        imagen_original2 = Image.open("tipos_cuerpo.png")
+        imagen_original2 = Image.open(ruta_raiz("tipos_cuerpo.png"))
         imagen_redimensionada2 = imagen_original2.resize((400, 260))
         foto_ecto = ImageTk.PhotoImage(imagen_redimensionada2)
         fondo2.create_image(200, 120, image=foto_ecto)

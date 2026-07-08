@@ -8,8 +8,10 @@ from PIL import Image, ImageTk
 import os
 import sqlite3
 
-BASE_DIR = os.path.dirname(__file__)
-RUTA_BD = os.path.join(BASE_DIR, "..", "db", "bodytype.db")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DIR_BD = os.path.abspath(os.path.join(BASE_DIR, "..", "db"))
+os.makedirs(DIR_BD, exist_ok=True)
+RUTA_BD = os.path.join(DIR_BD, "bodytype.db")
 
 conexion = sqlite3.connect(RUTA_BD)
 cursor = conexion.cursor()
@@ -132,14 +134,23 @@ def resultados(usuario_actual):
 
     ventana_resultados=tk.Toplevel()
     ventana_resultados.title("Resultados")
-    ventana_resultados.iconbitmap("icono.ico")
+    try:
+        ruta_ico = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "icono.ico"))
+        if not os.path.exists(ruta_ico):
+            ruta_ico = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "static", "icono.ico"))
+        ventana_resultados.iconbitmap(ruta_ico)
+    except Exception:
+        pass
     ventana_resultados.geometry("700x650")
     ventana_resultados.config(padx=0, pady=0)
     ventana_resultados.grab_set()
     ventana_resultados.grid_columnconfigure(0, weight=1)
     ventana_resultados.grid_columnconfigure(1, weight=1)
 
-    imagen = Image.open("fondo_resultado.jpeg")
+    ruta_img = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "fondo_resultado.jpeg"))
+    if not os.path.exists(ruta_img):
+        ruta_img = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "static", "fondo_resultado.jpeg"))
+    imagen = Image.open(ruta_img)
     imagen = imagen.resize((700, 650), Image.Resampling.LANCZOS)
 
     foto_fondo_validar = ImageTk.PhotoImage(imagen)
@@ -326,17 +337,27 @@ def progreso(usuario_actual, nombre_usuario):
     global dias_entrenamiento_usuario
     global cadera_usuario, lbl_cadera, lbl_cintura
 
-    text_usuario = nombre_usuario.get()
+    text_usuario = nombre_usuario.get() if hasattr(nombre_usuario, 'get') else nombre_usuario
 
     ventana_progreso = tk.Toplevel()
     ventana_progreso.title("Evaluacion corporal")
-    ventana_progreso.iconbitmap("icono.ico")
+    try:
+        import os
+        ruta_ico = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "icono.ico"))
+        if not os.path.exists(ruta_ico):
+            ruta_ico = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "static", "icono.ico"))
+        ventana_progreso.iconbitmap(ruta_ico)
+    except Exception:
+        pass
     ventana_progreso.geometry("500x600")
     ventana_progreso.config(padx=0, pady=0)
     ventana_progreso.grab_set()
 
 
-    imagen = Image.open("fondo_progreso.jpeg")
+    ruta_img = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "fondo_progreso.jpeg"))
+    if not os.path.exists(ruta_img):
+        ruta_img = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "static", "fondo_progreso.jpeg"))
+    imagen = Image.open(ruta_img)
     imagen = imagen.resize((600, 600), Image.Resampling.LANCZOS)
 
     foto_fondo_validar = ImageTk.PhotoImage(imagen)
