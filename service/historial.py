@@ -5,16 +5,18 @@ from PIL import Image, ImageTk
 import tkinter as tk
 from tkinter import messagebox
 
-
-import os
 import sqlite3
 
-BASE_DIR = os.path.dirname(__file__)
-RUTA_BD = os.path.join(BASE_DIR, "..", "bd", "bodytype.db")
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+RUTA_BD = os.path.join(BASE_DIR, "db", "bodytype.db")
+ICONO = os.path.join(BASE_DIR, "static", "icono.ico")
+FONDO_HISTORIAL = os.path.join(BASE_DIR, "static", "fondo_historial.png")
 
 conexion = sqlite3.connect(RUTA_BD)
 cursor = conexion.cursor()
-
 
 
 
@@ -54,7 +56,7 @@ def historial(usuario_actual):
 
     ventana_historial=tk.Toplevel()
     ventana_historial.title("Historial")
-    ventana_historial.iconbitmap("icono.ico")
+    ventana_historial.iconbitmap(ICONO)
     ventana_historial.geometry("700x650")
     ventana_historial.config(padx=0, pady=0)
     ventana_historial.grab_set()
@@ -62,7 +64,7 @@ def historial(usuario_actual):
     ventana_historial.grid_columnconfigure(1, weight=1)
 
 
-    imagen = Image.open("fondo_historial.png")
+    imagen = Image.open(FONDO_HISTORIAL)
     imagen = imagen.resize((700, 650), Image.Resampling.LANCZOS)
 
     foto_fondo_validar = ImageTk.PhotoImage(imagen)

@@ -2,19 +2,28 @@ from tkinter import*
 from PIL import Image, ImageTk
 import tkinter as tk
 
+import os
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+ICONO = os.path.join(BASE_DIR, "static", "icono.ico")
+FONDO_ENTRENAMIENTO = os.path.join(BASE_DIR, "static", "fondo_entrenamiento.PNG")
+
+ENTRENAMIENTO_ECTO = os.path.join(BASE_DIR, "static", "entrenamiento_ecto.png")
+ENTRENAMIENTO_MESO = os.path.join(BASE_DIR, "static", "entrenamiento_meso.png")
+ENTRENAMIENTO_ENDO = os.path.join(BASE_DIR, "static", "entrenamiento_endo.png")
 
 
 def alimentacion_endomorfo():
 
     ventana_alimentacion=tk.Toplevel()
     ventana_alimentacion.title("Guia para endomorfos")
-    ventana_alimentacion.iconbitmap("icono.ico")
+    ventana_alimentacion.iconbitmap(ICONO)
     ventana_alimentacion.config(width=550, height=550)
     ventana_alimentacion.grab_set()
 
 
-    imagen = Image.open("fondo_entrenamiento.PNG")
+    imagen = Image.open(FONDO_ENTRENAMIENTO)
     imagen = imagen.resize((600, 600), Image.Resampling.LANCZOS)
 
     foto_fondo_validar = ImageTk.PhotoImage(imagen)
@@ -175,12 +184,12 @@ def endomorfo():
 
     ventana_endomorfo=tk.Toplevel()
     ventana_endomorfo.title("Guia para endomorfos")
-    ventana_endomorfo.iconbitmap("icono.ico")
+    ventana_endomorfo.iconbitmap(ICONO)
     ventana_endomorfo.config(width=600, height=600)
     ventana_endomorfo.grab_set()
 
     
-    imagen = Image.open("fondo_entrenamiento.PNG")
+    imagen = Image.open(FONDO_ENTRENAMIENTO)
     imagen = imagen.resize((600, 600), Image.Resampling.LANCZOS)
 
     foto_fondo_validar = ImageTk.PhotoImage(imagen)
@@ -211,9 +220,12 @@ def endomorfo():
 
 
     fondo = Canvas(frame_endomorfo, width=500, height=400, bd=0, highlightthickness=0)
-    imagen_original = Image.open("entrenamiento_endo.png")
+
+    imagen_original = Image.open(ENTRENAMIENTO_ENDO)
     imagen_redimensionada = imagen_original.resize((500, 400))
+
     foto_logo = ImageTk.PhotoImage(imagen_redimensionada)
+
     fondo.image = foto_logo 
     fondo.create_image(250, 200, image=foto_logo)
     fondo.place(x=25, y=70)
@@ -235,11 +247,11 @@ def alimentacion_mesomorfo():
 
     ventana_alimentacion=tk.Toplevel()
     ventana_alimentacion.title("Guia para mesomorfos")
-    ventana_alimentacion.iconbitmap("icono.ico")
+    ventana_alimentacion.iconbitmap(ICONO)
     ventana_alimentacion.config(width=550, height=550)
     ventana_alimentacion.grab_set()
 
-    imagen = Image.open("fondo_entrenamiento.PNG")
+    imagen = Image.open(FONDO_ENTRENAMIENTO)
     imagen = imagen.resize((600, 600), Image.Resampling.LANCZOS)
 
     foto_fondo_validar = ImageTk.PhotoImage(imagen)
@@ -393,11 +405,11 @@ def mesomorfo():
 
     ventana_mesomorfo=tk.Toplevel()
     ventana_mesomorfo.title("Guia para mesomorfos")
-    ventana_mesomorfo.iconbitmap("icono.ico")
+    ventana_mesomorfo.iconbitmap(ICONO)
     ventana_mesomorfo.config(width=600, height=600)
     ventana_mesomorfo.grab_set()
 
-    imagen = Image.open("fondo_entrenamiento.PNG")
+    imagen = Image.open(FONDO_ENTRENAMIENTO)
     imagen = imagen.resize((600, 600), Image.Resampling.LANCZOS)
 
     foto_fondo_validar = ImageTk.PhotoImage(imagen)
@@ -428,8 +440,10 @@ def mesomorfo():
 
 
     fondo = Canvas(frame_mesomorfo, width=500, height=400, bd=0, highlightthickness=0)
-    imagen_original = Image.open("entrenamiento_meso.png")
+
+    imagen_original = Image.open(ENTRENAMIENTO_MESO)
     imagen_redimensionada = imagen_original.resize((500, 400))
+
     foto_logo = ImageTk.PhotoImage(imagen_redimensionada)
     fondo.image = foto_logo 
     fondo.create_image(250, 200, image=foto_logo)
@@ -449,11 +463,11 @@ def alimentacion_ectomorfo():
 
     ventana_alimentacion=tk.Toplevel()
     ventana_alimentacion.title("Guia para ectomorfos")
-    ventana_alimentacion.iconbitmap("icono.ico")
+    ventana_alimentacion.iconbitmap(ICONO)
     ventana_alimentacion.config(width=600, height=600)
     ventana_alimentacion.grab_set()
 
-    imagen = Image.open("fondo_entrenamiento.PNG")
+    imagen = Image.open(FONDO_ENTRENAMIENTO)
     imagen = imagen.resize((600, 600), Image.Resampling.LANCZOS)
 
     foto_fondo_validar = ImageTk.PhotoImage(imagen)
@@ -607,11 +621,11 @@ def ectomorfo():
 
     ventana_ectomorfo=tk.Toplevel()
     ventana_ectomorfo.title("Guia para ectomorfos")
-    ventana_ectomorfo.iconbitmap("icono.ico")
+    ventana_ectomorfo.iconbitmap(ICONO)
     ventana_ectomorfo.config(width=600, height=600)
     ventana_ectomorfo.grab_set()
 
-    imagen = Image.open("fondo_entrenamiento.PNG")
+    imagen = Image.open(FONDO_ENTRENAMIENTO)
     imagen = imagen.resize((600, 600), Image.Resampling.LANCZOS)
 
     foto_fondo_validar = ImageTk.PhotoImage(imagen)
@@ -638,8 +652,10 @@ def ectomorfo():
     seleccion_cuerpo.place(x=250, y=40)
 
     fondo = Canvas(frame_ectomorfo, width=500, height=400, bd=0, highlightthickness=0)
-    imagen_original = Image.open("entrenamiento_ecto.png")
+
+    imagen_original=Image.open(ENTRENAMIENTO_ECTO)
     imagen_redimensionada = imagen_original.resize((500, 400))
+    
     foto_logo = ImageTk.PhotoImage(imagen_redimensionada)
     fondo.image = foto_logo 
     fondo.create_image(250, 200, image=foto_logo)

@@ -13,13 +13,27 @@ from tkinter import messagebox
 import tkinter as tk
 from tkinter import ttk
 
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Base de datos
+RUTA_BD = os.path.join(BASE_DIR, "db", "bodytype.db")
+
+# Icono
+ICONO = os.path.join(BASE_DIR, "static", "icono.ico")
+
+# Imágenes
+FONDO_LOGIN = os.path.join(BASE_DIR, "static", "fondo_login.jpeg")
+LOGO = os.path.join(BASE_DIR, "static", "login_mejor.png")
+
 
 #base de datos
 
 import sqlite3
 
 
-conexion = sqlite3.connect("bodytype.db")
+conexion = sqlite3.connect(RUTA_BD)
 cursor = conexion.cursor()
 
 cursor.execute("""
@@ -117,7 +131,7 @@ def registro():
 
     ventana_registro=tk.Toplevel()
     ventana_registro.title("Registro")
-    ventana_registro.iconbitmap("icono.ico")
+    ventana_registro.iconbitmap(ICONO)
     ventana_registro.geometry("500x500")
     ventana_registro.config(padx=0, pady=0)
     ventana_registro.grab_set()
@@ -136,7 +150,7 @@ def registro():
     frame_registro.grid_propagate(False)
     frame_registro.grid_columnconfigure(0, weight=1)
 
-    imagen = Image.open("fondo_login.jpeg")
+    imagen = Image.open(FONDO_LOGIN)
     imagen = imagen.resize((600, 600), Image.Resampling.LANCZOS)
 
     foto_fondo_validar = ImageTk.PhotoImage(imagen)
@@ -155,7 +169,7 @@ def registro():
     canvas_logo = Canvas(frame_registro, width=70, height=70,
                      bd=0, highlightthickness=0, bg="#111111")
 
-    imagen_original = Image.open("login_mejor.png")
+    imagen_original = Image.open(LOGO)
     imagen_redimensionada = imagen_original.resize((70, 70))
     foto_logo = ImageTk.PhotoImage(imagen_redimensionada)
 
@@ -208,12 +222,12 @@ def registro():
 
 ventana_login= Tk()
 ventana_login.title("Login")
-ventana_login.iconbitmap("icono.ico")
+ventana_login.iconbitmap(ICONO)
 ventana_login.geometry("500x500")
 ventana_login.config(padx=0, pady=0)
 ventana_login.grid_columnconfigure(0, weight=1)
 
-imagen = Image.open("fondo_login.jpeg")
+imagen = Image.open(FONDO_LOGIN)
 imagen = imagen.resize((500, 500), Image.Resampling.LANCZOS)
 
 foto_fondo = ImageTk.PhotoImage(imagen)
@@ -259,7 +273,7 @@ titulo_sesion.pack(side="left")
 
 canvas_logo = Canvas(frame_login, width=70, height=70, bd=0, highlightthickness=0,  bg="#111111")
 
-imagen_original = Image.open("login_mejor.png")
+imagen_original = Image.open(LOGO)
 imagen_redimensionada = imagen_original.resize((70, 70))
 foto_logo = ImageTk.PhotoImage(imagen_redimensionada)
 

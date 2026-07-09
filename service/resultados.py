@@ -1,15 +1,18 @@
-from tkinter import*
-from tkinter import messagebox 
-import math
-import tkinter as tk
-from PIL import Image, ImageTk
-
-
 import os
+import math
 import sqlite3
+import tkinter as tk
+from tkinter import messagebox
+from tkinter import * # Primero Tkinter
+from PIL import Image, ImageTk  # Después PIL para que no se sobrescriba
 
-BASE_DIR = os.path.dirname(__file__)
-RUTA_BD = os.path.join(BASE_DIR, "..", "db", "bodytype.db")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+RUTA_BD = os.path.join(BASE_DIR, "db", "bodytype.db")
+
+ICONO = os.path.join(BASE_DIR, "static", "icono.ico")
+FONDO_RESULTADO = os.path.join(BASE_DIR, "static", "fondo_resultado.jpeg")
+FONDO_PROGRESO = os.path.join(BASE_DIR, "static", "fondo_progreso.jpeg")
 
 conexion = sqlite3.connect(RUTA_BD)
 cursor = conexion.cursor()
@@ -39,7 +42,7 @@ def resultados(usuario_actual):
         return
 
     # 2. Separamos los cálculos matemáticos por género
-    if genero == "hombre":
+    if genero.lower() == "hombre":
         porcentaje_grasa = 86.010 * math.log10(cintura - cuello) - 70.041 * math.log10(altura * 100.0) + 36.76
         porcentaje_grasa = round(porcentaje_grasa, 2)
 
@@ -57,7 +60,7 @@ def resultados(usuario_actual):
         else:
             resultado_clasificacion = "Usted tiene su grasa corporal alta"
 
-    elif genero=="mujer": # Si el género es mujer
+    elif genero.lower()=="mujer": # Si el género es mujer
         # Intentamos leer la cadera SOLO si es mujer
         try:
             cadera = float(cadera_usuario.get())
@@ -132,14 +135,14 @@ def resultados(usuario_actual):
 
     ventana_resultados=tk.Toplevel()
     ventana_resultados.title("Resultados")
-    ventana_resultados.iconbitmap("icono.ico")
+    ventana_resultados.iconbitmap(ICONO)
     ventana_resultados.geometry("700x650")
     ventana_resultados.config(padx=0, pady=0)
     ventana_resultados.grab_set()
     ventana_resultados.grid_columnconfigure(0, weight=1)
     ventana_resultados.grid_columnconfigure(1, weight=1)
 
-    imagen = Image.open("fondo_resultado.jpeg")
+    imagen=Image.open(FONDO_RESULTADO)
     imagen = imagen.resize((700, 650), Image.Resampling.LANCZOS)
 
     foto_fondo_validar = ImageTk.PhotoImage(imagen)
@@ -326,17 +329,17 @@ def progreso(usuario_actual, nombre_usuario):
     global dias_entrenamiento_usuario
     global cadera_usuario, lbl_cadera, lbl_cintura
 
-    text_usuario = nombre_usuario.get()
+    text_usuario = nombre_usuario
 
     ventana_progreso = tk.Toplevel()
     ventana_progreso.title("Evaluacion corporal")
-    ventana_progreso.iconbitmap("icono.ico")
+    ventana_progreso.iconbitmap(ICONO)
     ventana_progreso.geometry("500x600")
     ventana_progreso.config(padx=0, pady=0)
     ventana_progreso.grab_set()
 
 
-    imagen = Image.open("fondo_progreso.jpeg")
+    imagen= Image.open(FONDO_PROGRESO)
     imagen = imagen.resize((600, 600), Image.Resampling.LANCZOS)
 
     foto_fondo_validar = ImageTk.PhotoImage(imagen)
@@ -453,7 +456,7 @@ def progreso(usuario_actual, nombre_usuario):
     # Altura
     Label(
         frame_progreso,
-        text="¿Cuánto mide?",
+        text="¿Cuánto mide?(cm)",
         bg="#111111",
         fg="white",
     ).grid(column=0, row=6, sticky="w", pady=5)
