@@ -19,6 +19,62 @@ conexion = sqlite3.connect(RUTA_BD)
 cursor = conexion.cursor()
 
 
+def leer_historial(cursor, usuario_actual):
+
+    cursor.execute("""
+        SELECT
+            id,
+            fecha,
+            porcentaje_grasa,
+            masa_grasa,
+            masa_muscular,
+            tmb,
+            tdee
+        FROM historial
+        WHERE id_usuario=?
+        ORDER BY fecha DESC
+    """, (usuario_actual,))
+
+    return cursor.fetchall()
+
+
+
+def eliminar_evaluacion(cursor, conexion, id_historial):
+
+    cursor.execute("""
+        DELETE FROM historial
+        WHERE id=?
+    """, (id_historial,))
+
+    conexion.commit()
+
+def eliminar_seleccion(tabla, cursor, conexion):
+
+    seleccion = tabla.selection()
+
+    if not seleccion:
+        messagebox.showwarning(
+            "Aviso",
+            "Seleccione una evaluación."
+        )
+        return
+
+    id_historial = int(seleccion[0])
+
+    eliminar_evaluacion(cursor, conexion, id_historial)
+
+    tabla.delete(seleccion[0])
+
+    messagebox.showinfo(
+        "Éxito",
+        "Evaluación eliminada."
+    )
+
+
+
+
+
+
 
 
 def borrar_historial(tabla, cursor, conexion, usuario_actual):
@@ -166,23 +222,17 @@ def historial(usuario_actual):
     height=260
     )
 
-    cursor.execute("""
-    SELECT
-    fecha,
-    porcentaje_grasa,
-    masa_grasa,
-    masa_muscular,
-    tmb,
-    tdee
-    FROM historial
-    WHERE id_usuario=?
-    ORDER BY fecha DESC
-    """, (usuario_actual,))
+    
 
-    datos = cursor.fetchall()
+    datos = leer_historial(cursor, usuario_actual)
 
     for fila in datos:
-        tabla.insert("", "end", values=fila)
+        tabla.insert(
+            "",
+            "end",
+            iid=fila[0],
+            values=fila[1:]
+        )
 
     frame_botones = tk.Frame(
     frame_historial,
@@ -194,11 +244,34 @@ def historial(usuario_actual):
     text="Borrar historial",bg="#111111",fg="#7AAC1D",font=("Arial", 15),activebackground="#222222",activeforeground="#A5D62A",highlightthickness=1,highlightbackground="#7AAC1D",bd=0,  command=lambda: borrar_historial(tabla,cursor,conexion,usuario_actual)
     ).pack(side="left", padx=10)
 
+
+    Button(
+    frame_botones,
+    text="Eliminar evaluación",
+    bg="#111111",
+    fg="#7AAC1D",
+    font=("Arial", 15),
+    activebackground="#222222",
+    activeforeground="#A5D62A",
+    highlightthickness=1,
+    highlightbackground="#7AAC1D",
+    bd=0,
+    command=lambda: eliminar_seleccion(
+        tabla,
+        cursor,
+        conexion
+    )
+    ).pack(side="left", padx=10)
+
+
+
     Button(
     frame_botones,
     text="Cerrar",bg="#111111",fg="#7AAC1D",activebackground="#222222",font=("Arial", 15),activeforeground="#A5D62A",highlightthickness=1,highlightbackground="#7AAC1D",bd=0,
     command=ventana_historial.destroy,
     ).pack(side="left", padx=10)
+
+
 
     frame_botones.place(
     relx=0.5,
