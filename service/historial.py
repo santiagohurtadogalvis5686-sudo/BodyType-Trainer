@@ -7,6 +7,7 @@ from tkinter import messagebox
 
 import sqlite3
 
+<<<<<<< HEAD
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -14,6 +15,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RUTA_BD = os.path.join(BASE_DIR, "db", "bodytype.db")
 ICONO = os.path.join(BASE_DIR, "static", "icono.ico")
 FONDO_HISTORIAL = os.path.join(BASE_DIR, "static", "fondo_historial.png")
+=======
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DIR_BD = os.path.abspath(os.path.join(BASE_DIR, "..", "db"))
+os.makedirs(DIR_BD, exist_ok=True)
+RUTA_BD = os.path.join(DIR_BD, "bodytype.db")
+>>>>>>> dcf901ba8527e88828eac6e7c9bb10addb0d6902
 
 conexion = sqlite3.connect(RUTA_BD)
 cursor = conexion.cursor()
@@ -112,7 +119,18 @@ def historial(usuario_actual):
 
     ventana_historial=tk.Toplevel()
     ventana_historial.title("Historial")
+<<<<<<< HEAD
     ventana_historial.iconbitmap(ICONO)
+=======
+    try:
+        import os
+        ruta_ico = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "icono.ico"))
+        if not os.path.exists(ruta_ico):
+            ruta_ico = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "static", "icono.ico"))
+        ventana_historial.iconbitmap(ruta_ico)
+    except Exception:
+        pass
+>>>>>>> dcf901ba8527e88828eac6e7c9bb10addb0d6902
     ventana_historial.geometry("700x650")
     ventana_historial.config(padx=0, pady=0)
     ventana_historial.grab_set()
@@ -120,7 +138,14 @@ def historial(usuario_actual):
     ventana_historial.grid_columnconfigure(1, weight=1)
 
 
+<<<<<<< HEAD
     imagen = Image.open(FONDO_HISTORIAL)
+=======
+    ruta_img = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "fondo_historial.png"))
+    if not os.path.exists(ruta_img):
+        ruta_img = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "static", "fondo_historial.png"))
+    imagen = Image.open(ruta_img)
+>>>>>>> dcf901ba8527e88828eac6e7c9bb10addb0d6902
     imagen = imagen.resize((700, 650), Image.Resampling.LANCZOS)
 
     foto_fondo_validar = ImageTk.PhotoImage(imagen)
