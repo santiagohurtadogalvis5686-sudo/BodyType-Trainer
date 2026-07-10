@@ -1,15 +1,4 @@
 
-import os
-
-def obtener_ruta_recurso(nombre_archivo):
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    ruta = os.path.join(base_dir, nombre_archivo)
-    if not os.path.exists(ruta):
-        ruta_static = os.path.join(base_dir, "static", nombre_archivo)
-        if os.path.exists(ruta_static):
-            return ruta_static
-    return ruta
-
 from service.validacion import validar
 
 from tkinter import*
@@ -39,13 +28,10 @@ FONDO_LOGIN = os.path.join(BASE_DIR, "static", "fondo_login.jpeg")
 LOGO = os.path.join(BASE_DIR, "static", "login_mejor.png")
 
 
-import os
+#base de datos
+
 import sqlite3
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DIR_BD = os.path.join(BASE_DIR, "db")
-os.makedirs(DIR_BD, exist_ok=True)
-RUTA_BD = os.path.join(DIR_BD, "bodytype.db")
 
 conexion = sqlite3.connect(RUTA_BD)
 cursor = conexion.cursor()
@@ -145,11 +131,7 @@ def registro():
 
     ventana_registro=tk.Toplevel()
     ventana_registro.title("Registro")
-<<<<<<< HEAD
     ventana_registro.iconbitmap(ICONO)
-=======
-    ventana_registro.iconbitmap(obtener_ruta_recurso("icono.ico"))
->>>>>>> dcf901ba8527e88828eac6e7c9bb10addb0d6902
     ventana_registro.geometry("500x500")
     ventana_registro.config(padx=0, pady=0)
     ventana_registro.grab_set()
@@ -168,11 +150,7 @@ def registro():
     frame_registro.grid_propagate(False)
     frame_registro.grid_columnconfigure(0, weight=1)
 
-<<<<<<< HEAD
     imagen = Image.open(FONDO_LOGIN)
-=======
-    imagen = Image.open(obtener_ruta_recurso("fondo_login.jpeg"))
->>>>>>> dcf901ba8527e88828eac6e7c9bb10addb0d6902
     imagen = imagen.resize((600, 600), Image.Resampling.LANCZOS)
 
     foto_fondo_validar = ImageTk.PhotoImage(imagen)
@@ -191,11 +169,7 @@ def registro():
     canvas_logo = Canvas(frame_registro, width=70, height=70,
                      bd=0, highlightthickness=0, bg="#111111")
 
-<<<<<<< HEAD
     imagen_original = Image.open(LOGO)
-=======
-    imagen_original = Image.open(obtener_ruta_recurso("login_mejor.png"))
->>>>>>> dcf901ba8527e88828eac6e7c9bb10addb0d6902
     imagen_redimensionada = imagen_original.resize((70, 70))
     foto_logo = ImageTk.PhotoImage(imagen_redimensionada)
 
@@ -248,22 +222,12 @@ def registro():
 
 ventana_login= Tk()
 ventana_login.title("Login")
-<<<<<<< HEAD
 ventana_login.iconbitmap(ICONO)
-=======
-ruta_icono = obtener_ruta_recurso("icono.ico")
-if os.path.exists(ruta_icono):
-    ventana_login.iconbitmap(ruta_icono)
->>>>>>> dcf901ba8527e88828eac6e7c9bb10addb0d6902
 ventana_login.geometry("500x500")
 ventana_login.config(padx=0, pady=0)
 ventana_login.grid_columnconfigure(0, weight=1)
 
-<<<<<<< HEAD
 imagen = Image.open(FONDO_LOGIN)
-=======
-imagen = Image.open(obtener_ruta_recurso("fondo_login.jpeg"))
->>>>>>> dcf901ba8527e88828eac6e7c9bb10addb0d6902
 imagen = imagen.resize((500, 500), Image.Resampling.LANCZOS)
 
 foto_fondo = ImageTk.PhotoImage(imagen)
@@ -309,11 +273,7 @@ titulo_sesion.pack(side="left")
 
 canvas_logo = Canvas(frame_login, width=70, height=70, bd=0, highlightthickness=0,  bg="#111111")
 
-<<<<<<< HEAD
 imagen_original = Image.open(LOGO)
-=======
-imagen_original = Image.open(obtener_ruta_recurso("login_mejor.png"))
->>>>>>> dcf901ba8527e88828eac6e7c9bb10addb0d6902
 imagen_redimensionada = imagen_original.resize((70, 70))
 foto_logo = ImageTk.PhotoImage(imagen_redimensionada)
 
