@@ -1,0 +1,200 @@
+/* ===========================
+   ESTILOS GENERALES
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    background:url("../static/fondo_resultado.jpeg") center center/cover no-repeat;
+
+    min-height:100vh;
+
+}
+
+/* ===========================
+   CONTENEDOR PRINCIPAL
+=========================== */
+
+.fondo{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:100vh;
+
+}
+
+.contenedor{
+
+    width:650px;
+
+    background:#111111;
+
+    border:2px solid #7AAC05;
+
+    padding:30px;
+
+}
+
+/* ===========================
+   TITULO
+=========================== */
+
+h1{
+
+    color:white;
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    font-size:30px;
+
+}
+
+/* ===========================
+   RESULTADOS
+=========================== */
+
+.fila{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    margin-bottom:18px;
+
+    gap:20px;
+
+}
+
+.titulo{
+
+    width:55%;
+
+    color:#7AAC05;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+.valor{
+
+    width:45%;
+
+    color:white;
+
+    font-size:16px;
+
+    text-align:left;
+
+    word-break:break-word;
+
+}
+
+/* ===========================
+   MENSAJE
+=========================== */
+
+.mensaje{
+
+    margin-top:30px;
+
+    color:white;
+
+    text-align:center;
+
+    font-size:14px;
+
+    line-height:1.6;
+
+    border-top:1px solid #333;
+
+    padding-top:20px;
+
+}
+
+/* ===========================
+   BOTONES
+=========================== */
+
+.botones{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-top:30px;
+
+}
+
+button{
+
+    background:#111111;
+
+    color:#7AAC05;
+
+    border:1px solid #7AAC05;
+
+    padding:10px 28px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#222222;
+
+    color:#A5D62A;
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:700px){
+
+    .contenedor{
+
+        width:95%;
+
+        padding:20px;
+
+    }
+
+    .fila{
+
+        flex-direction:column;
+
+        gap:8px;
+
+    }
+
+    .titulo,
+    .valor{
+
+        width:100%;
+
+    }
+
+}

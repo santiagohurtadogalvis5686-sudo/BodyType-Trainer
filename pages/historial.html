@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Historial</title>
+
+    <link rel="icon" type="image/png" href="../src/static/icono.ico">
+
+    <link rel="stylesheet" href="../src/styles/historial.css">
+
+</head>
+
+<body>
+
+<div class="fondo">
+
+    <div class="contenedor">
+
+        <h1>Historial de evaluaciones</h1>
+
+        <div class="tabla-contenedor">
+
+            <table id="tablaHistorial">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Fecha</th>
+
+                        <th>% Grasa</th>
+
+                        <th>Masa grasa</th>
+
+                        <th>Músculo</th>
+
+                        <th>TMB</th>
+
+                        <th>TDEE</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <!-- historial.js insertará aquí las evaluaciones -->
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="botones">
+
+            <button id="btnBorrarHistorial">
+
+                Borrar historial
+
+            </button>
+
+            <button id="btnEliminar">
+
+                Eliminar evaluación
+
+            </button>
+
+            <button id="btnCerrar">
+
+                Cerrar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="../src/hook/historial.js"></script>
+
+</body>
+
+</html>

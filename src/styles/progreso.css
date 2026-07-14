@@ -1,0 +1,165 @@
+/* ===========================
+   ESTILOS GENERALES
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    background:url("../static/fondo_progreso.jpeg") center center/cover no-repeat;
+
+    min-height:100vh;
+
+}
+
+/* ===========================
+   CONTENEDOR
+=========================== */
+
+.fondo{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:100vh;
+
+}
+
+.contenedor{
+
+    width:500px;
+
+    background:#111111;
+
+    border:2px solid #7AAC05;
+
+    padding:25px;
+
+}
+
+/* ===========================
+   TITULOS
+=========================== */
+
+h1{
+
+    color:white;
+
+    text-align:center;
+
+    margin-bottom:15px;
+
+}
+
+h2{
+
+    color:#7AAC05;
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    font-size:22px;
+
+}
+
+/* ===========================
+   FORMULARIO
+=========================== */
+
+.campo{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:15px;
+
+    gap:15px;
+
+}
+
+.campo label{
+
+    color:white;
+
+    width:55%;
+
+    font-size:15px;
+
+}
+
+.campo input{
+
+    width:45%;
+
+    padding:8px;
+
+    background:#1E1E1E;
+
+    color:#7AAC05;
+
+    border:none;
+
+    outline:none;
+
+    font-size:15px;
+
+}
+
+/* ===========================
+   BOTONES
+=========================== */
+
+.botones{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    margin-top:40px;
+
+}
+
+.botones button{
+
+    padding:12px 20px;
+
+    border:none;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    background:#111111;
+
+    color:#7AAC1D;
+
+    border:1px solid #7AAC1D;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+.botones button:hover{
+
+    background:#7AAC1D;
+
+    color:black;
+
+}

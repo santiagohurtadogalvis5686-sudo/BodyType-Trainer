@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registro | BodyType Trainer</title>
+
+    <link rel="icon" type="image/png" href="../src/static/icono.ico">
+
+    <link rel="stylesheet" href="../src/styles/index.css">
+
+</head>
+
+<body>
+
+    <section id="login">
+
+        <img
+            src="../src/static/login_mejor.png"
+            alt="Logo"
+            class="logo">
+
+        <h1>BodyType Trainer</h1>
+
+        <h2 class="subtitulo">
+            Registro
+        </h2>
+
+        <form id="registroForm">
+
+    <input
+        type="text"
+        id="nuevoUsuario"
+        class="inputLogin"
+        placeholder="Nombre de usuario"
+        required>
+
+    <input
+        type="password"
+        id="nuevaContrasena"
+        class="inputLogin"
+        placeholder="Contraseña"
+        required>
+
+    <button
+        type="submit"
+        class="btnLogin">
+
+        Registrarse
+
+    </button>
+
+</form>
+
+
+        <button
+            type="button"
+            id="btnVolver"
+            class="btnLogin">
+
+            Volver al inicio
+
+        </button>
+        <p id="mensajeRegistro"></p>
+    </section>
+
+    <script src="../src/hook/registro.js"></script>
+
+</body>
+
+</html>

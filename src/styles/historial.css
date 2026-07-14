@@ -1,0 +1,252 @@
+/* ===========================
+   ESTILOS GENERALES
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    background:url("../static/fondo_historial.png") center center/cover no-repeat;
+
+    min-height:100vh;
+
+}
+
+/* ===========================
+   CONTENEDOR
+=========================== */
+
+.fondo{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:100vh;
+
+}
+
+.contenedor{
+
+    width:750px;
+
+    background:#111111;
+
+    border:2px solid #7AAC05;
+
+    padding:25px;
+
+}
+
+/* ===========================
+   TÍTULO
+=========================== */
+
+h1{
+
+    color:white;
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+    font-size:30px;
+
+}
+
+/* ===========================
+   TABLA
+=========================== */
+
+.tabla-contenedor{
+
+    max-height:350px;
+
+    overflow-y:auto;
+
+    border:2px solid #7AAC05;
+
+}
+
+/* Barra de desplazamiento */
+
+.tabla-contenedor::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+.tabla-contenedor::-webkit-scrollbar-track{
+
+    background:#222222;
+
+}
+
+.tabla-contenedor::-webkit-scrollbar-thumb{
+
+    background:#7AAC05;
+
+}
+
+.tabla-contenedor::-webkit-scrollbar-thumb:hover{
+
+    background:#A5D62A;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:#111111;
+
+}
+
+thead{
+
+    background:#111111;
+
+    position:sticky;
+
+    top:0;
+
+}
+
+th{
+
+    color:#7AAC05;
+
+    padding:12px;
+
+    font-size:16px;
+
+    border-bottom:2px solid #7AAC05;
+
+}
+
+td{
+
+    color:white;
+
+    text-align:center;
+
+    padding:12px;
+
+    border-bottom:1px solid #333333;
+
+}
+
+tbody tr{
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+tbody tr:hover{
+
+    background:#222222;
+
+}
+
+tbody tr.seleccionado{
+
+    background:#333333;
+
+}
+
+/* ===========================
+   BOTONES
+=========================== */
+
+.botones{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    margin-top:25px;
+
+    flex-wrap:wrap;
+
+}
+
+button{
+
+    background:#111111;
+
+    color:#7AAC05;
+
+    border:1px solid #7AAC05;
+
+    padding:10px 22px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#222222;
+
+    color:#A5D62A;
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:800px){
+
+    .contenedor{
+
+        width:95%;
+
+        padding:20px;
+
+    }
+
+    table{
+
+        font-size:14px;
+
+    }
+
+    th,
+    td{
+
+        padding:8px;
+
+    }
+
+    .botones{
+
+        flex-direction:column;
+
+    }
+
+    button{
+
+        width:100%;
+
+    }
+
+}

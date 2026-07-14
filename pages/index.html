@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BodyType Trainer</title>
+
+    <link rel="icon" type="image/png" href="../src/static/icono.ico">
+
+
+    <link rel="stylesheet" href="../src/styles/index.css">
+</head>
+<body>
+
+    <!-- Pantalla de inicio de sesión -->
+    <section id="login">
+
+         <img
+            src="../src/static/login_mejor.png"
+            alt="Logo"
+            class="logo">
+
+        <h1>BodyType Trainer</h1>
+
+        <form id="loginForm">
+
+            <input
+                type="text"
+                id="usuario"
+                name="usuario"
+                placeholder="Usuario"
+                required>
+
+            <input
+                type="password"
+                id="contrasena"
+                name="contrasena"
+                placeholder="Contraseña"
+                required>
+
+            <button type="submit">
+                Iniciar sesión
+            </button>
+
+            <button type="button" id="btnRegistro">
+                Registrarse
+            </button>
+            <p class="registro">
+                ¿No tienes una cuenta?
+            </p>
+        </form>
+
+        <p id="mensaje"></p>
+
+    </section>
+
+
+    <!-- Pantalla de selección de cuerpo -->
+    <section id="seleccionCuerpo" hidden>
+
+        <h2>Seleccione su tipo de cuerpo 💪</h2>
+
+        <div id="tiposCuerpo">
+
+            <div class="tipo" id="ectomorfo">
+
+                <img
+                    src="../src/static/ectomorfo.png"
+                    alt="Ectomorfo">
+
+                <h3>Ectomorfo</h3>
+
+            </div>
+
+            <div class="tipo" id="mesomorfo">
+
+                <img
+                    src="../src/static/mesomorfo.png"
+                    alt="Mesomorfo">
+
+                <h3>Mesomorfo</h3>
+
+            </div>
+
+            <div class="tipo" id="endomorfo">
+
+                <img
+                    src="../src/static/endomorfo.png"
+                    alt="Endomorfo">
+
+                <h3>Endomorfo</h3>
+
+            </div>
+
+        </div>
+
+        <div id="acciones">
+
+            <button id="btnNuevaEvaluacion">
+                Nueva evaluación
+            </button>
+
+            <button id="btnProgreso">
+                Mi progreso
+            </button>
+
+            <button id="btnCerrarSesion">
+                Cerrar sesión
+            </button>
+
+        </div>
+
+    </section>
+
+    <script src="../src/hook/index.js"></script>
+
+</body>
+</html>

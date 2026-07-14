@@ -1,0 +1,169 @@
+/* ===========================
+   ESTILOS GENERALES
+=========================== */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+body{
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    background:url("../static/fondo_entrenamiento.PNG") center center/cover no-repeat;
+
+    min-height:100vh;
+
+}
+
+/* ===========================
+   CONTENEDOR
+=========================== */
+
+.fondo{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:100vh;
+
+}
+
+.contenedor{
+
+    width:650px;
+
+    background:#111111;
+
+    border:2px solid #7AAC05;
+
+    padding:25px;
+
+}
+
+/* ===========================
+   TITULO
+=========================== */
+
+h1{
+
+    color:white;
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+    font-size:28px;
+
+}
+
+h1 span{
+
+    color:skyblue;
+
+}
+
+/* ===========================
+   CUADRO DE TEXTO
+=========================== */
+
+.texto{
+
+    border:2px solid #7AAC05;
+
+    background:#111111;
+
+    height:380px;
+
+    overflow-y:auto;
+
+    padding:10px;
+
+}
+
+/* Barra de desplazamiento */
+
+.texto::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+.texto::-webkit-scrollbar-track{
+
+    background:#222222;
+
+}
+
+.texto::-webkit-scrollbar-thumb{
+
+    background:#7AAC05;
+
+}
+
+.texto::-webkit-scrollbar-thumb:hover{
+
+    background:#A5D62A;
+
+}
+
+pre{
+
+    color:white;
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    font-size:15px;
+
+    white-space:pre-wrap;
+
+    line-height:1.6;
+
+}
+
+/* ===========================
+   BOTÓN
+=========================== */
+
+button{
+
+    display:block;
+
+    margin:20px auto 0;
+
+    padding:12px 20px;
+
+    border:none;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    background:#111111;
+
+    color:#7AAC1D;
+
+    border:1px solid #7AAC1D;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#7AAC1D;
+
+    color:black;
+
+}
