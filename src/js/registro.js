@@ -31,7 +31,7 @@ async function registrarUsuario(e) {
 
     try {
 
-        const respuesta = await fetch("http://127.0.0.1:5000/registro", {
+        const respuesta = await fetch("http://127.0.0.1:8080/registro", {
 
             method: "POST",
 

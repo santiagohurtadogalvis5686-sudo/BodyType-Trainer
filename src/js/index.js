@@ -36,7 +36,7 @@ async function validarUsuario(e) {
         // CONEXIÓN CON FASTAPI: Cambiamos la ruta al endpoint de Python
         // Si tu backend corre en el mismo puerto que el servidor de estáticos, basta con "/login"
         // Si corre en otro puerto (ej: http://127.0.0.1:8000), pon la URL completa.
-        const respuesta = await fetch("http://127.0.0.1:5000/login", {
+        const respuesta = await fetch("http://127.0.0.1:8080/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
