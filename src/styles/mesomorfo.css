@@ -27,7 +27,7 @@ body{
 
 .contenedor{
 
-    width:650px;
+    width:550px;
 
     background:#111111;
 
@@ -103,7 +103,7 @@ h2{
 
     width:100%;
 
-    height:500px;
+    height:380px;
 
     object-fit:contain;
 

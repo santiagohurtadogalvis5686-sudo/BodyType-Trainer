@@ -158,6 +158,7 @@ body{
     border-radius:10px;
     cursor:pointer;
     transition:.3s;
+    position: relative;
 
 }
 
@@ -167,6 +168,43 @@ body{
     background:#222222;
 
 }
+
+/* ==========================================
+   RECUADRO DE CARACTERÍSTICAS (TOOLTIP)
+========================================== */
+
+/* Creamos el recuadro usando el pseudo-elemento ::after */
+.tipo::after {
+    content: attr(data-info); /* <-- Esto extrae el texto del HTML de forma dinámica */
+    position: absolute;
+    bottom: 105%; /* Se posiciona justo encima de la tarjeta */
+    left: 50%;
+    transform: translateX(-50%) translateY(10px); /* Centrado horizontal con un leve desfase hacia abajo */
+    width: 90%;
+    background: #111111;
+    color: #ffffff;
+    border: 1px solid #7AAC1D;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: center;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.5);
+    
+    /* Estados iniciales para la animación */
+    opacity: 0;
+    pointer-events: none; /* Evita que estorbe al mouse si no está activo */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 10;
+}
+
+/* Cuando el usuario pasa el mouse, el recuadro se vuelve visible y sube suavemente */
+.tipo:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+
 
 .tipo img{
 
