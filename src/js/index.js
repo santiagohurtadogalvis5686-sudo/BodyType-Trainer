@@ -17,7 +17,7 @@ const btnRegistro = document.getElementById("btnRegistro");
 
 loginForm.addEventListener("submit", validarUsuario);
 btnRegistro.addEventListener("click", () => {
-    window.location.href = "registro.html";
+    window.location.href = "/pages/registro.html";
 });
 
 async function validarUsuario(e) {
@@ -76,13 +76,13 @@ document.getElementById("endomorfo").addEventListener("click", () => { seleccion
 function seleccionarTipo(tipo){
     switch(tipo){
         case "ectomorfo":
-            window.location.href = "ectomorfo.html";
+            window.location.href = "/pages/ectomorfo.html";
             break;
         case "mesomorfo":
-            window.location.href = "mesomorfo.html";
+            window.location.href = "/pages/mesomorfo.html";
             break;
         case "endomorfo":
-            window.location.href = "endomorfo.html";
+            window.location.href = "/pages/endomorfo.html";
             break;
     }
 }
@@ -92,7 +92,7 @@ function seleccionarTipo(tipo){
 // ===============================
 document.getElementById("btnNuevaEvaluacion").addEventListener("click", () => {
 
-    window.location.href = "progreso.html";
+    window.location.href = "/pages/progreso.html";
 
 });
 
@@ -101,7 +101,7 @@ document.getElementById("btnNuevaEvaluacion").addEventListener("click", () => {
 // ===============================
 document.getElementById("btnProgreso").addEventListener("click", () => {
     if(usuarioActual != null){
-        window.location.href = "historial.html?id=" + usuarioActual;
+        window.location.href = "/pages/historial.html?id=" + usuarioActual;
     }
 });
 

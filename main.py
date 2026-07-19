@@ -92,28 +92,36 @@ async def registro(data: RegistroRequest):
             detail="Ese usuario ya existe."
         )
 
+# ==========================================
 # --- CONFIGURACIÓN DE ARCHIVOS ESTÁTICOS ---
-# Ahora apuntamos directamente a 'src', donde viven tus carpetas img, js y styles
+# ==========================================
+# Apunta a la carpeta 'src' para exponer de forma segura 'img', 'js' y 'styles'
 src_path = BASE_DIR / "src"
 app.mount("/static", StaticFiles(directory=str(src_path)), name="static")
 
-# Ruta para servir tu index.html principal
+# ==========================================
+# --- VISTAS / RUTAS DE LAS PÁGINAS HTML ---
+# ==========================================
+
+# Ruta para servir tu index.html principal (Vive directamente en 'src')
 @app.get("/")
 async def read_index():
-    ruta_index = BASE_DIR / "pages" / "index.html"
+    ruta_index = src_path / "index.html"
     if ruta_index.exists():
         return FileResponse(ruta_index)
     raise HTTPException(status_code=404, detail="index.html no encontrado")
 
-# Ruta dinámica para servir las demás páginas HTML
-@app.get("/{page_name}.html")
+# Ruta dinámica para servir las demás páginas HTML (Viven dentro de 'src/pages/')
+@app.get("/pages/{page_name}.html")
 async def get_html_page(page_name: str):
-    file_path = BASE_DIR / "pages" / f"{page_name}.html"
+    file_path = src_path / "pages" / f"{page_name}.html"
     if file_path.exists():
         return FileResponse(file_path)
-    raise HTTPException(status_code=404, detail="Página no encontrada")
+    raise HTTPException(status_code=404, detail=f"La página '{page_name}.html' no fue encontrada")
 
+# ==========================================
 # ARRANQUE ÚNICO EN EL PUERTO 8080
+# ==========================================
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="127.0.0.1", port=8080, reload=True)

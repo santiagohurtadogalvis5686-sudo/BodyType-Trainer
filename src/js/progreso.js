@@ -51,7 +51,7 @@ document.getElementById("formProgreso").addEventListener("submit",(e)=>{
         );
 
         // Redirige solo si todo está confirmado
-        window.location.href="resultados.html"; 
+        window.location.href="/pages/resultados.html"; 
     } 
     // Si presiona "Cancelar", el flujo se detiene y se queda en la misma página
 });

@@ -8,7 +8,7 @@ if (!datos) {
 
     alert("No hay datos para mostrar.");
 
-    window.location.href = "progreso.html";
+    window.location.href = "/pages/progreso.html";
 
 }
 
