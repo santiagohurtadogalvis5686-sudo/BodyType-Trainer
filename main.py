@@ -1,17 +1,37 @@
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
+from pathlib import Path
+import sqlite3
 import os
 
 app = FastAPI()
 
-# Modelo de datos para el Login
+# Definimos la raíz del proyecto de forma segura (la carpeta donde vive este archivo)
+BASE_DIR = Path(__file__).resolve().parent
+
+# Ruta de la base de datos (dentro de la carpeta db)
+RUTA_BD = BASE_DIR / "db" / "bodytype.db"
+
+# ==========================================
+# CONEXIÓN A LA BASE DE DATOS (MIGRADO DE FLASK)
+# ==========================================
+def obtener_conexion():
+    conexion = sqlite3.connect(str(RUTA_BD))
+    conexion.row_factory = sqlite3.Row
+    return conexion
+
+# Modelos de datos para las peticiones de FastAPI
 class LoginRequest(BaseModel):
     usuario: str
     contrasena: str
 
-# Middleware personalizado para ver en consola TODAS las peticiones que entran
+class RegistroRequest(BaseModel):
+    usuario: str
+    contrasena: str
+
+# Middleware personalizado para registrar peticiones
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
     print(f"--> [PETICIÓN] {request.method} {request.url.path}")
@@ -19,42 +39,81 @@ async def log_requests(request: Request, call_next):
     print(f"<-- [RESPUESTA] Código de estado: {response.status_code}")
     return response
 
+# ==========================================
+# RUTA DE LOGIN REAL (MIGRADO DE FLASK)
+# ==========================================
 @app.post("/login")
 async def login(data: LoginRequest):
-    print(f"\n[LOGIN INTENTO] Usuario recibido: '{data.usuario}' | Contraseña recibida: '{data.contrasena}'")
+    print(f"\n[LOGIN INTENTO] Usuario recibido: '{data.usuario}'")
     
-    # Simulación de validación
-    if data.usuario == "admin" and data.contrasena == "1234":
-        print("[LOGIN ÉXITO] Credenciales correctas. ID generado: 1\n")
-        return {"success": True, "id": 1}
+    conexion = obtener_conexion()
+    cursor = conexion.cursor()
+    
+    cursor.execute(
+        "SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?",
+        (data.usuario, data.contrasena)
+    )
+    resultado = cursor.fetchone()
+    conexion.close()
+    
+    if resultado:
+        print("[LOGIN ÉXITO] Credenciales correctas encontradas en la BD.\n")
+        return {"ok": True, "mensaje": "Inicio de sesión exitoso."}
     
     print("[LOGIN FALLIDO] Credenciales inválidas.\n")
-    return {"success": False, "message": "Usuario o contraseña incorrectos."}
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Usuario o contraseña incorrectos."
+    )
+
+# ==========================================
+# RUTA DE REGISTRO REAL (MIGRADO DE FLASK)
+# ==========================================
+@app.post("/registro")
+async def registro(data: RegistroRequest):
+    try:
+        conexion = obtener_conexion()
+        cursor = conexion.cursor()
+        
+        cursor.execute(
+            "INSERT INTO usuarios(usuario, contrasena) VALUES (?, ?)",
+            (data.usuario, data.contrasena)
+        )
+        conexion.commit()
+        conexion.close()
+        
+        print(f"[REGISTRO ÉXITO] Usuario '{data.usuario}' creado con éxito.")
+        return {"ok": True, "mensaje": "Usuario registrado correctamente."}
+        
+    except sqlite3.IntegrityError:
+        print(f"[REGISTRO FALLIDO] El usuario '{data.usuario}' ya existe.")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Ese usuario ya existe."
+        )
 
 # --- CONFIGURACIÓN DE ARCHIVOS ESTÁTICOS ---
-print("[INFO] Verificando rutas de archivos estáticos...")
-if os.path.exists("./src/static"):
-    print("[OK] Carpeta './src/static' encontrada exitosamente.")
-    app.mount("/static", StaticFiles(directory="./src/static"), name="static")
-else:
-    print("[ERROR CRÍTICO] No se encontró la carpeta './src/static'. Revisa la estructura.")
+# Ahora apuntamos directamente a 'src', donde viven tus carpetas img, js y styles
+src_path = BASE_DIR / "src"
+app.mount("/static", StaticFiles(directory=str(src_path)), name="static")
 
 # Ruta para servir tu index.html principal
 @app.get("/")
 async def read_index():
-    ruta_index = "./pages/index.html"
-    if os.path.exists(ruta_index):
-        print(f"[Carga HTML] Sirviendo la página principal: {ruta_index}")
+    ruta_index = BASE_DIR / "pages" / "index.html"
+    if ruta_index.exists():
         return FileResponse(ruta_index)
-    print(f"[ERROR] No se encontró el archivo HTML en: {ruta_index}")
     raise HTTPException(status_code=404, detail="index.html no encontrado")
 
-# Ruta dinámica para servir las demás páginas HTML (.html)
+# Ruta dinámica para servir las demás páginas HTML
 @app.get("/{page_name}.html")
 async def get_html_page(page_name: str):
-    file_path = f"./pages/{page_name}.html"
-    if os.path.exists(file_path):
-        print(f"[Carga HTML] Sirviendo página secundaria: {file_path}")
+    file_path = BASE_DIR / "pages" / f"{page_name}.html"
+    if file_path.exists():
         return FileResponse(file_path)
-    print(f"[ERROR 404] El cliente solicitó una página inexistente: {file_path}")
     raise HTTPException(status_code=404, detail="Página no encontrada")
+
+# ARRANQUE ÚNICO EN EL PUERTO 8080
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="127.0.0.1", port=8080, reload=True)

@@ -12,7 +12,7 @@ body{
 
     font-family:Arial, Helvetica, sans-serif;
 
-    background:url("../static/fondo_resultado.jpeg") center center/cover no-repeat;
+    background:url("/static/img/fondo_resultado.jpeg") center center/cover no-repeat;
 
     min-height:100vh;
 
