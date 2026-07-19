@@ -27,11 +27,11 @@ body{
 
 .contenedor{
 
-    width:550px;
+    width:660px;
 
     background:#111111;
 
-    border:2px solid #7AAC05;
+    border:1px solid #7AAC05;
 
     text-align:center;
 
@@ -87,6 +87,8 @@ h2{
 
     width:100%;
 
+    height: 410px;
+
     border:2px solid #7AAC05;
 
     display:flex;
@@ -103,9 +105,9 @@ h2{
 
     width:100%;
 
-    height:380px;
+    height:100%;
 
-    object-fit:contain;
+    object-fit:cover;
 
 }
 
